@@ -1,0 +1,96 @@
+@use '@angular/material' as mat;
+
+// Define custom theme colors
+$api-tester-primary: mat.define-palette(mat.$orange-palette, 500);
+$api-tester-accent: mat.define-palette(mat.$blue-palette, 500);
+$api-tester-warn: mat.define-palette(mat.$red-palette, 500);
+
+// Create the theme object
+$api-tester-theme: mat.define-light-theme((
+  color: (
+    primary: $api-tester-primary,
+    accent: $api-tester-accent,
+    warn: $api-tester-warn,
+  )
+));
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat.core();
+
+// Include theme styles for core and each component used in your app
+@include mat.all-component-themes($api-tester-theme);
+
+/* Global Styles */
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Method Badge Styles */
+.method-get {
+  background-color: #22c55e !important;
+  color: white !important;
+}
+
+.method-post {
+  background-color: #f59e0b !important;
+  color: white !important;
+}
+
+.method-put {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.method-delete {
+  background-color: #ef4444 !important;
+  color: white !important;
+}
+
+/* Status Styles */
+.status-success {
+  color: #22c55e !important;
+}
+
+.status-error {
+  color: #ef4444 !important;
+}
+
+.status-warning {
+  color: #f59e0b !important;
+}
+
+/* Syntax Highlighting */
+.json-viewer {
+  font-family: 'Courier New', monospace;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.json-key {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.json-string {
+  color: #22c55e;
+}
+
+.json-number {
+  color: #f59e0b;
+}
+
+.json-boolean {
+  color: #8b5cf6;
+}
+
+.json-null {
+  color: #6b7280;
+}
