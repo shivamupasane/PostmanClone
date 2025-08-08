@@ -20,7 +20,7 @@ import { HttpRequest, HttpResponse } from '../../models/http-models';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    // SidebarComponent,
+    SidebarComponent,
     RequestBuilderComponent,
     ResponseViewerComponent
   ],
@@ -36,9 +36,9 @@ import { HttpRequest, HttpResponse } from '../../models/http-models';
       <!-- Main Content -->
       <div class="content-area">
         <mat-sidenav-container class="sidenav-container">
-          <!-- Sidebar - temporarily disabled for testing -->
+          <!-- Sidebar -->
           <mat-sidenav mode="side" opened class="sidebar">
-            <div>Sidebar placeholder</div>
+            <app-sidebar></app-sidebar>
           </mat-sidenav>
 
           <!-- Main Panel -->

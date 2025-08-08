@@ -264,10 +264,7 @@ export class SidebarComponent implements OnInit {
   requests = signal<RequestItem[]>([]);
   history = signal<HistoryItem[]>([]);
 
-  constructor(
-    private apiService: ApiService,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor() {}
 
   ngOnInit() {
     this.loadCollections();
@@ -275,36 +272,15 @@ export class SidebarComponent implements OnInit {
   }
 
   loadCollections() {
-    this.apiService.getCollections().subscribe({
-      next: (collections) => {
-        this.collections.set(collections);
-        // Load requests for each collection
-        collections.forEach(collection => {
-          this.apiService.getRequestsByCollection(collection.id).subscribe({
-            next: (requests) => {
-              this.requests.update(current => [
-                ...current.filter(r => r.collectionId !== collection.id),
-                ...requests
-              ]);
-            }
-          });
-        });
-      },
-      error: (error) => {
-        this.snackBar.open('Failed to load collections', 'Close', { duration: 3000 });
-      }
-    });
+    // Mock data for now
+    this.collections.set([
+      { id: '1', name: 'My API Tests', description: 'Sample collection', createdAt: new Date() }
+    ]);
   }
 
   loadHistory() {
-    this.apiService.getHistory().subscribe({
-      next: (history) => {
-        this.history.set(history);
-      },
-      error: (error) => {
-        this.snackBar.open('Failed to load history', 'Close', { duration: 3000 });
-      }
-    });
+    // Mock data for now
+    this.history.set([]);
   }
 
   getRequestsForCollection(collectionId: string): RequestItem[] {
@@ -322,31 +298,22 @@ export class SidebarComponent implements OnInit {
   }
 
   openNewCollectionDialog() {
-    // Dialog logic would go here
     const name = prompt('Collection name:');
     if (name) {
-      this.apiService.createCollection({ name, description: '' }).subscribe({
-        next: () => {
-          this.loadCollections();
-          this.snackBar.open('Collection created', 'Close', { duration: 3000 });
-        },
-        error: () => {
-          this.snackBar.open('Failed to create collection', 'Close', { duration: 3000 });
-        }
-      });
+      const newCollection = {
+        id: Date.now().toString(),
+        name,
+        description: '',
+        createdAt: new Date()
+      };
+      this.collections.update(current => [...current, newCollection]);
+      console.log('Collection created:', name);
     }
   }
 
   clearHistory() {
-    this.apiService.clearHistory().subscribe({
-      next: () => {
-        this.history.set([]);
-        this.snackBar.open('History cleared', 'Close', { duration: 3000 });
-      },
-      error: () => {
-        this.snackBar.open('Failed to clear history', 'Close', { duration: 3000 });
-      }
-    });
+    this.history.set([]);
+    console.log('History cleared');
   }
 
   formatTime(date?: Date): string {
