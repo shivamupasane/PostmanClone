@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpResponse } from '../../models/http-models';
 
 @Component({
@@ -302,7 +302,7 @@ export class ResponseViewerComponent {
 
   viewMode = signal<'pretty' | 'raw' | 'preview'>('pretty');
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor() {}
 
   getStatusClass(status: number): string {
     if (status >= 200 && status < 300) return 'status-success';
@@ -348,9 +348,9 @@ export class ResponseViewerComponent {
     try {
       const text = this.getResponseText();
       await navigator.clipboard.writeText(text);
-      this.snackBar.open('Response copied to clipboard', 'Close', { duration: 3000 });
+      console.log('Response copied to clipboard');
     } catch (error) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
+      console.error('Failed to copy to clipboard');
     }
   }
 }

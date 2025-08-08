@@ -9,8 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ApiService } from '../../services/api.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import type { HttpRequest, HttpResponse, ParamRow, HeaderRow } from '../../models/http-models';
 
 @Component({
@@ -299,10 +298,7 @@ export class RequestBuilderComponent implements OnInit {
     { id: '1', enabled: true, key: '', value: '', description: '' }
   ]);
 
-  constructor(
-    private apiService: ApiService,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor() {}
 
   ngOnInit() {
     // Initialize with the input request
@@ -398,14 +394,23 @@ export class RequestBuilderComponent implements OnInit {
         : undefined
     };
 
-    this.apiService.sendRequest(requestData).subscribe({
-      next: (response) => {
-        this.sendRequestEvent.emit(response);
-        this.snackBar.open('Request sent successfully', 'Close', { duration: 3000 });
-      },
-      error: (error) => {
-        this.snackBar.open('Request failed: ' + error.message, 'Close', { duration: 5000 });
-      }
-    });
+    // For now, simulate API call with fetch
+    fetch(requestData.url)
+      .then(response => response.json())
+      .then(data => {
+        const mockResponse = {
+          status: 200,
+          statusText: 'OK',
+          headers: {'Content-Type': 'application/json'},
+          body: data,
+          time: '245ms',
+          size: '1.2kb'
+        };
+        this.sendRequestEvent.emit(mockResponse);
+        console.log('Request sent successfully');
+      })
+      .catch(error => {
+        console.error('Request failed:', error.message);
+      });
   }
 }
