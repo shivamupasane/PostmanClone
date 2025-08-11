@@ -2,22 +2,21 @@
 
 ## Overview
 
-This is a full-stack web application that functions as an API testing tool, similar to Postman. It allows users to create collections, organize HTTP requests, execute API calls, and view responses. The application features a modern Angular 18 frontend with a Node.js/Express backend and PostgreSQL database for persistence.
+This is a full-stack web application that functions as an API testing tool, similar to Postman. It allows users to create collections, organize HTTP requests, execute API calls, and view responses. The application features a modern React frontend with a Node.js/Express backend and PostgreSQL database for persistence.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Framework preference: Angular 18 (migrated from React on 2025-01-08)
 
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: Angular 18 with TypeScript
-- **UI Components**: Angular Material for modern, accessible UI components
-- **Styling**: Angular Material theming with SCSS for custom styling
-- **State Management**: Angular Services with RxJS for reactive state management
-- **Routing**: Angular Router for client-side routing
-- **Forms**: Angular Reactive Forms with built-in validation
+- **Framework**: React 18 with TypeScript using Vite as the build tool
+- **UI Components**: Shadcn/ui component library with Radix UI primitives for accessible, customizable components
+- **Styling**: Tailwind CSS with CSS variables for theming and dark mode support
+- **State Management**: TanStack Query (React Query) for server state management and caching
+- **Routing**: Wouter for lightweight client-side routing
+- **Forms**: React Hook Form with Zod validation for type-safe form handling
 
 ### Backend Architecture
 - **Framework**: Express.js with TypeScript

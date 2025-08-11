@@ -1,4 +1,4 @@
-import { type Collection, type InsertCollection, type Request, type InsertRequest, type History, type InsertHistory } from "../shared/schema";
+import { type Collection, type InsertCollection, type Request, type InsertRequest, type History, type InsertHistory } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -45,7 +45,6 @@ export class MemStorage implements IStorage {
     const collection: Collection = {
       ...insertCollection,
       id,
-      description: insertCollection.description || null,
       createdAt: new Date(),
     };
     this.collections.set(id, collection);
@@ -77,9 +76,6 @@ export class MemStorage implements IStorage {
     const request: Request = {
       ...insertRequest,
       id,
-      headers: insertRequest.headers || {},
-      params: insertRequest.params || {},
-      body: insertRequest.body || null,
       createdAt: new Date(),
     };
     this.requests.set(id, request);
@@ -111,13 +107,6 @@ export class MemStorage implements IStorage {
     const history: History = {
       ...insertHistory,
       id,
-      headers: insertHistory.headers || {},
-      params: insertHistory.params || {},
-      body: insertHistory.body || null,
-      responseStatus: insertHistory.responseStatus || null,
-      responseTime: insertHistory.responseTime || null,
-      responseSize: insertHistory.responseSize || null,
-      responseBody: insertHistory.responseBody || null,
       createdAt: new Date(),
     };
     this.history.set(id, history);
